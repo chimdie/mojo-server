@@ -6,7 +6,7 @@
   "scripts": {
     "build": "rimraf dist && tsc",
     "preserve": "npm run build",
-    "dev": "nodemon --config nodemon.json src/app.ts",
+    "start:dev": "nodemon --config nodemon.json src/app.ts",
     "prestart": "npm run build",
     "start": "cross-env NODE_ENV=production node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",

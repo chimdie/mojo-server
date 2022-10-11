@@ -49,5 +49,6 @@ export default class UserModel implements ModelI {
       timestamps: true,
     }
   );
+  
   model: mongoose.Model<any, {}> = mongoose.model<UserSI>("users", this.schema);
 }

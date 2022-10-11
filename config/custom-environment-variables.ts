@@ -4,5 +4,6 @@ export default {
   refreshTokenPrivateKey: "REFRESH_PRIVATE_KEY",
   refreshTokenPublicKey: "REFRESH_PUBLIC_KEY",
   dbUri: "DB_URI",
+  dbName:"DB_NAME",
   port: "PORT",
 };

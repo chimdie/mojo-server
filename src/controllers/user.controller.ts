@@ -4,6 +4,8 @@ import UserService from "../services/user.service";
 import BaseController from "./base.controller";
 import GroupService from "../services/group.service";
 import { userGroupInput, groupAddUserInput } from "@schemas/group.schema";
+import { CreateUserInput } from "@schemas/index";
+import { hash } from "argon2";
 @autoInjectable()
 export default class UserController extends BaseController {
   constructor(service?: UserService) {
@@ -39,6 +41,13 @@ export default class UserController extends BaseController {
     }
   };
 
+  signUp = async (req: Request<CreateUserInput["body"]>, res: Response) => {
+    let user = req.body;
+    let password = req.body.password;
+    let hashedPassword = await hash(password);
+    
+    await this.service.post({ ...user, password: hashedPassword });
+  };
   // deleteUser = async (req: Request, res: Response) => {
   //   const { id } = req.params;
   //   try {

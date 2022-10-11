@@ -4,8 +4,9 @@ import log from "./logger";
 
 function connect() {
   const dbUri = config.get("dbUri") as string;
+
   return mongoose
-    .connect(dbUri, {})
+    .connect(dbUri)
     .then(() => {
       log.info("Database Connected successfully");
     })

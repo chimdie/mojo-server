@@ -7,7 +7,7 @@ const userRouter = Router();
 const userController = new UserController();
 
 userRouter.get("/", userController.get);
-userRouter.post("/", validate(createUserSchema), userController.post);
+userRouter.post("/signup", validate(createUserSchema), userController.signUp);
 userRouter.get("/:id", userController.getById);
 
 userRouter.get("/:id/groups", userController.getUserGroups);
@@ -18,5 +18,4 @@ userRouter.patch(
 );
 userRouter.put("/:id", userController.updateOne);
 userRouter.delete("/:id", userController.delete);
-
 export default userRouter;

@@ -17,3 +17,12 @@ export interface SessionDocumentI extends mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
 }
+
+export interface GroupDocument extends mongoose.Document {
+  name: string;
+  author: UserDocumentI['id'];
+  monthlyDepositAmount: number;
+  description?: string;
+  createdAt: Date;
+  updatedAt: Date;
+}

@@ -1,14 +1,17 @@
+/* eslint-disable import/order */
+
+/* eslint-disable import/first */
 import 'reflect-metadata';
 import express from 'express';
 import dotenv from 'dotenv';
+
+dotenv.config();
 
 import connect from '@utils/connect';
 import log from '@utils/logger/index';
 import { SERVER_PORT, SERVER_HOST } from './config';
 import appMiddleWares from './config/middlewares';
 import { routesV1 } from './routes';
-
-dotenv.config();
 
 const app = express();
 app.use(appMiddleWares);

@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import { injectable, singleton } from 'tsyringe';
 import { groupStatus } from '@interfaces/contstants';
-import BookI from '../interfaces/group.interface';
+import { GroupDocument } from '../interfaces/document.interface';
 import ModelI from '../interfaces/model.interface';
 
 @singleton()
@@ -47,5 +47,5 @@ export default class GroupModel implements ModelI {
     }
   );
 
-  model: mongoose.Model<any, {}> = mongoose.model<BookI>('Group', this.schema);
+  model: mongoose.Model<any, {}> = mongoose.model<GroupDocument>('Group', this.schema);
 }

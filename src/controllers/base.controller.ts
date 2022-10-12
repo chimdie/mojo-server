@@ -14,7 +14,7 @@ export default class BaseController {
     try {
       const resource = await this.service.post(req.body);
 
-      res.send(resource);
+      return res.send(resource);
     } catch (error: any) {
       return res.status(500).send({ message: error.message });
     }
@@ -23,7 +23,7 @@ export default class BaseController {
   get = async (req: Request, res: Response) => {
     try {
       const resource = await this.service.get();
-      res.send(resource);
+      return res.send(resource);
     } catch (error: any) {
       return res.status(500).send({ message: error.message });
     }
@@ -36,7 +36,7 @@ export default class BaseController {
       if (resource === null) {
         return res.status(400).send({ message: 'No data found' });
       }
-      res.send(resource);
+      return res.send(resource);
     } catch (error: any) {
       return res.status(500).send({ message: error.message });
     }
@@ -48,7 +48,7 @@ export default class BaseController {
       const resource = await this.service.findOneAndUpdate(query, req.body, {
         lean: true,
       });
-      res.send(resource);
+      return res.send(resource);
     } catch (error: any) {
       return res.status(500).send({ message: error.message });
     }
@@ -64,7 +64,7 @@ export default class BaseController {
         },
         { lean: true }
       );
-      res.send(resource);
+      return res.send(resource);
     } catch (error: any) {
       return res.status(500).send({ message: error.message });
     }
@@ -74,7 +74,7 @@ export default class BaseController {
     const { id } = req.params;
     try {
       const resource = await this.service.delete(id);
-      res.send(resource);
+      return res.send(resource);
     } catch (error: any) {
       return res.status(500).send({ message: 'server error' });
     }

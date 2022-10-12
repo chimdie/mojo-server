@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "commit": "commit",
     "build": "rimraf dist && tsc",
     "preserve": "npm run build",
     "start:dev": "nodemon --config nodemon.json src/app.ts",

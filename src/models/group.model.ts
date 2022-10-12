@@ -41,6 +41,14 @@ export default class GroupModel implements ModelI {
         type: String,
         required: false,
       },
+      members: {
+        type: [
+          {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+          },
+        ],
+      },
     },
     {
       timestamps: true,

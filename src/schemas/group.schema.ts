@@ -1,9 +1,9 @@
-import { object, string, number, TypeOf } from 'zod';
+import { object, string, number, array, TypeOf } from 'zod';
 
 const params = {
   params: object({
     id: string({
-      required_error: 'Book is required',
+      required_error: 'Group id is required',
     }),
   }),
 };
@@ -60,9 +60,16 @@ export const groupAddUser = object({
     }),
   }),
 });
+export const addMembersScheam = object({
+  body: object({
+    members: string().array().nonempty(),
+  }),
+});
 
-export type ReadBookInput = TypeOf<typeof getGroup>;
-export type updateBookInput = TypeOf<typeof updateGroup>;
+export type MemberInput = TypeOf<typeof addMembersScheam>;
+
+export type GetGroupInput = TypeOf<typeof getGroup>;
+export type updateGroupInput = TypeOf<typeof updateGroup>;
 export type userGroupInput = TypeOf<typeof getUserGroups>;
 export type groupAddUserInput = TypeOf<typeof groupAddUser>;
 

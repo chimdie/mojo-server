@@ -1,4 +1,4 @@
-import mongoose, { FilterQuery, QueryOptions } from 'mongoose';
+import mongoose, { DocumentDefinition, FilterQuery, QueryOptions } from 'mongoose';
 import ModelI from '@interfaces/model.interface';
 
 export default class BaseService<T> {
@@ -30,9 +30,12 @@ export default class BaseService<T> {
   }
 
   getById = async (id: string, options?: QueryOptions): Promise<T> => {
-    const resource = (await this.model.findOne({
-      id: mongoose.Types.ObjectId(id),
-    })) as T;
+    const resource = (await this.model.findOne(
+      {
+        id: mongoose.Types.ObjectId(id),
+      },
+      options
+    )) as T;
     return resource;
   };
 
@@ -49,4 +52,13 @@ export default class BaseService<T> {
   delete = (id: string): void => {
     return this.model.remove({ id: mongoose.Types.ObjectId(id) });
   };
+  async addToCollection<I>(id: string, input: object, options?: QueryOptions): Promise<I[]> {
+    return (await this.model.findByIdAndUpdate(
+      id,
+      {
+        $push: { ...input },
+      },
+      options
+    )) as I[];
+  }
 }

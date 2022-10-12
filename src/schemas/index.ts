@@ -1,16 +1,3 @@
-import {
-  ReadBookInput,
-  createBookInput,
-  getGroup,
-  updateGroup,
-  updateBookInput,
-  createGroupSchema,
-  groupAddUser,
-} from './group.schema';
-import { CreateUserInput, createUserSchema } from './user.schema';
-
-export type { ReadBookInput, updateBookInput, createBookInput, CreateUserInput };
-
-export { getGroup, createGroupSchema, createUserSchema, updateGroup, groupAddUser };
-
+export * from './group.schema';
+export * from './user.schema';
 export * from './userSession.schema';

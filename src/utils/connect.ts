@@ -1,12 +1,12 @@
 import mongoose from "mongoose";
 import config from "config";
 import log from "./logger";
+import { SERVER_DB_URI } from "src/config";
 
 function connect() {
-  const dbUri = config.get("dbUri") as string;
 
   return mongoose
-    .connect(dbUri)
+    .connect(SERVER_DB_URI)
     .then(() => {
       log.info("Database Connected successfully");
     })

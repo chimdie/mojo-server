@@ -1,9 +1,12 @@
 export default {
-  accessTokenPrivateKey: "ACCESS_TOKEN_PRIVATE_KEY",
-  accessTokenPublicKey: "ACCESS_TOKEN_PUBLIC_KEY",
-  refreshTokenPrivateKey: "REFRESH_PRIVATE_KEY",
-  refreshTokenPublicKey: "REFRESH_PUBLIC_KEY",
-  dbUri: "DB_URI",
-  dbName:"DB_NAME",
-  port: "PORT",
+  accessToken: {
+    privateKey: "ACCESS_TOKEN_PRIVATE_KEY",
+    publicKey: "ACCESS_TOKEN_PUBLIC_KEY",
+    accessTokenTtl: "ACCESS_TOKEN_TIME_TO_LEAVE",
+  },
+  refreshToken: {
+    privateKey: "REFRESH_PRIVATE_KEY",
+    publicKey: "REFRESH_PUBLIC_KEY",
+    refreshTokenTtl: "REFRESH_TOKEN_TIME_TO_LEAVE",
+  },
 };

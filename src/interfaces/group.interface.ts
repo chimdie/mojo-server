@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import UserDocument from "./user.interface";
+import UserDocument from "./document.interface";
 
 export default interface GroupDocument extends mongoose.Document {
   name: string;

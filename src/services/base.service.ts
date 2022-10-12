@@ -1,5 +1,5 @@
 import { autoInjectable } from "tsyringe";
-import mongoose from "mongoose";
+import mongoose, { FilterQuery, QueryOptions } from "mongoose";
 import ModelI from "@interfaces/model.interface";
 
 export default class BaseService<T> {
@@ -17,12 +17,18 @@ export default class BaseService<T> {
     }
   };
 
-  get = async (filters = {}): Promise<T[]> => {
-    const resource = (await this.model.find(filters)) as T[];
-    return resource;
-  };
+  // loggingIdentity<T extends Lengthwise>(arg: T): T {};
 
-  getById = async (id: string): Promise<T> => {
+  async get<T>(filters?: FilterQuery<T>, options?: QueryOptions): Promise<T[]> {
+    const resource = (await this.model.find(filters!, options)) as T[];
+    return resource;
+  }
+
+  async getOne<I>(filters: FilterQuery<I>, options?: QueryOptions): Promise<I> {
+    const resource = (await this.model.findOne(filters, options)) as I;
+    return resource;
+  }
+  getById = async (id: string, options?: QueryOptions): Promise<T> => {
     const resource = (await this.model.findOne({
       id: mongoose.Types.ObjectId(id),
     })) as T;
@@ -32,17 +38,21 @@ export default class BaseService<T> {
   findOneAndUpdate = async (
     query = {},
     update = {},
-    options = {}
+    options?: QueryOptions
   ): Promise<T[]> => {
     const resource = (await this.model.findOneAndUpdate(
       query,
       update,
-      options
+      options!
     )) as T[];
     return resource;
   };
 
-  updateOne = async (query = {}, update = {}, options = {}): Promise<T[]> => {
+  updateOne = async (
+    query = {},
+    update = {},
+    options: QueryOptions
+  ): Promise<T[]> => {
     const resource = (await this.model.updateOne(
       query,
       update,

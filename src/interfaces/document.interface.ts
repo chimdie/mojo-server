@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 // import { PostI } from "./post.interface";
 
-export default interface UserDocument extends mongoose.Document {
+export interface UserDocumentI extends mongoose.Document {
   id: string;
   emailAddress: string;
   fullName: string;
@@ -9,4 +9,11 @@ export default interface UserDocument extends mongoose.Document {
   createdAt: Date;
   updatedAt: Date;
   comparePassword(password: string): Promise<boolean>;
+}
+
+export interface SessionDocumentI extends mongoose.Document {
+  user: UserDocumentI['_id'];
+  valid: boolean;
+  createdAt: Date;
+  updatedAt: Date;
 }

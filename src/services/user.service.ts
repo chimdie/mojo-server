@@ -1,10 +1,10 @@
 import { autoInjectable, injectable } from "tsyringe";
-import UserSI from "@interfaces/user.interface";
+import {UserDocumentI} from "@interfaces/document.interface";
 import UserModel from "@models/user.model";
 import BaseService from "./base.service";
 
-@injectable()
-export default class UserService extends BaseService<UserSI> {
+@autoInjectable()
+export default class UserService extends BaseService<UserDocumentI> {
   constructor(modelI?: UserModel) {
     super(modelI!);
   }

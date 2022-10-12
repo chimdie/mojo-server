@@ -1,31 +1,27 @@
 import "reflect-metadata";
 import express from "express";
-import config from "config";
-import cors from "cors";
 import dotenv from "dotenv";
+dotenv.config();
+
 import connect from "@utils/connect"
 import log from "@utils/logger/index"
 import { routesV1 } from "./routes";
+import appMiddleWares from './config/middlewares';
+import { SERVER_PORT, SERVER_HOST } from "./config";
 
-dotenv.config();
 
-const port = config.get("port") as number;
-const host = config.get("host") as string;
 
 const app = express();
-app.use(cors());
+app.use(appMiddleWares);
 
-app.use(express.urlencoded({ extended: false }));
+const port = SERVER_PORT
+const host = SERVER_HOST
 
 app.get("/", (req, res) => {
   res.send("Welcome!");
 });
+
 app.use(express.json());
-
-
-app.get("/", (req, res) => {
-  res.send("Hey you i'm here...");
-});
 
 // this is for 404
 // app.use(function (req, res, next) {

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 // import { PostI } from "./post.interface";
 
 export interface UserDocumentI extends mongoose.Document {
@@ -14,6 +14,15 @@ export interface UserDocumentI extends mongoose.Document {
 export interface SessionDocumentI extends mongoose.Document {
   user: UserDocumentI['_id'];
   valid: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
+export interface GroupDocument extends mongoose.Document {
+  name: string;
+  author: UserDocumentI['id'];
+  monthlyDepositAmount: number;
+  description?: string;
   createdAt: Date;
   updatedAt: Date;
 }

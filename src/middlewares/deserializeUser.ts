@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { get } from 'lodash';
-import { verifyJwt } from '@utils/jwt.utils';
 import SessionService from '@services/session.service';
+import { verifyJwt } from '@utils/jwt.utils';
 
 const deserializeUser = async (req: Request, res: Response, next: NextFunction) => {
   const accessToken = get(req, 'headers.authorization', '').replace(/^Bearer\s/, '');
@@ -20,7 +20,7 @@ const deserializeUser = async (req: Request, res: Response, next: NextFunction) 
   }
 
   if (expired && refreshToken) {
-    const newSession = new SessionService()
+    const newSession = new SessionService();
     const newAccessToken = await newSession.reIssueAccessToken({ refreshToken });
 
     if (newAccessToken) {

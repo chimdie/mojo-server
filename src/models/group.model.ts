@@ -1,8 +1,8 @@
-import { injectable, singleton } from "tsyringe";
-import mongoose from "mongoose";
-import ModelI from "../interfaces/model.interface";
-import BookI from "../interfaces/group.interface";
-import { groupStatus } from "@interfaces/contstants";
+import mongoose from 'mongoose';
+import { injectable, singleton } from 'tsyringe';
+import { groupStatus } from '@interfaces/contstants';
+import { GroupDocument } from '../interfaces/document.interface';
+import ModelI from '../interfaces/model.interface';
 
 @singleton()
 @injectable()
@@ -46,5 +46,6 @@ export default class GroupModel implements ModelI {
       timestamps: true,
     }
   );
-  model: mongoose.Model<any, {}> = mongoose.model<BookI>("Group", this.schema);
+
+  model: mongoose.Model<any, {}> = mongoose.model<GroupDocument>('Group', this.schema);
 }

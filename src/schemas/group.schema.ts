@@ -1,9 +1,9 @@
-import { object, string, number, TypeOf } from "zod";
+import { object, string, number, TypeOf } from 'zod';
 
 const params = {
   params: object({
     id: string({
-      required_error: "Book is required",
+      required_error: 'Book is required',
     }),
   }),
 };
@@ -19,13 +19,13 @@ const body = {
 export const createGroupSchema = object({
   body: object({
     name: string({
-      required_error: "Group Name is required",
+      required_error: 'Group Name is required',
     }),
     monthlyDepositAmount: number({
-      required_error: "Monthly Deposit is required",
+      required_error: 'Monthly Deposit is required',
     }),
     owner: string({
-      required_error: "Owner id is required",
+      required_error: 'Owner id is required',
     }),
     description: string().optional(),
   }),
@@ -43,7 +43,7 @@ export const updateGroup = object({
 export const getUserGroups = object({
   params: object({
     id: string({
-      required_error: "Owner id is required",
+      required_error: 'Owner id is required',
     }),
   }),
 });
@@ -51,12 +51,12 @@ export const getUserGroups = object({
 export const groupAddUser = object({
   params: object({
     userId: string({
-      required_error: "user id is required",
+      required_error: 'user id is required',
     }),
   }),
   body: object({
     group: string({
-      required_error: "group id is required",
+      required_error: 'group id is required',
     }),
   }),
 });

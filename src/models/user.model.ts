@@ -1,7 +1,7 @@
 import { injectable, singleton } from "tsyringe";
 import mongoose from "mongoose";
 import ModelI from "../interfaces/model.interface";
-import UserSI from "../interfaces/user.interface";
+import {UserDocumentI} from "../interfaces/document.interface";
 import { userStatus } from "@interfaces/contstants";
 @singleton()
 @injectable()
@@ -50,5 +50,5 @@ export default class UserModel implements ModelI {
     }
   );
   
-  model: mongoose.Model<any, {}> = mongoose.model<UserSI>("users", this.schema);
+  model: mongoose.Model<any, {}> = mongoose.model<UserDocumentI>("users", this.schema);
 }

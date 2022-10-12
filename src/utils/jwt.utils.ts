@@ -3,7 +3,7 @@ import config from "config";
 
 export function signJwt(
   object: Object,
-  keyName: "accessTokenPrivateKey" | "refreshTokenPrivateKey",
+  keyName: 'accessToken.privateKey' | 'refreshToken.privateKey',
   options?: jwt.SignOptions | undefined
 ) {
   const signingKey = Buffer.from(
@@ -19,7 +19,7 @@ export function signJwt(
 
 export function verifyJwt(
   token: string,
-  keyName: "accessTokenPublicKey" | "refreshTokenPublicKey"
+  keyName: "accessToken.publicKey" | "refreshToken.publicKey"
 ) {
   const publicKey = Buffer.from(config.get<string>(keyName), "base64").toString(
     "ascii"

@@ -12,7 +12,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "check-types": "tsc --pretty --noEmit",
     "format": "prettier --write src/*",
-    "prepare": "husky install"
+    "prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install"
   },
   "keywords": [],
   "author": "",

@@ -1,10 +1,10 @@
-import { Router } from "express";
-import userRouters from "./users.routes";
-import groupRouters from "./groups.routes"
+import { Router } from 'express';
+import groupRouters from './groups.routes';
+import userRouters from './users.routes';
 
 const router = Router();
 
-router.use("/users", userRouters);
-router.use("/groups", groupRouters);
+router.use('/users', userRouters);
+router.use('/groups', groupRouters);
 
 export default router;

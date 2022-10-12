@@ -1,8 +1,9 @@
-import { injectable, singleton } from "tsyringe";
-import mongoose from "mongoose";
-import ModelI from "../interfaces/model.interface";
-import {UserDocumentI} from "../interfaces/document.interface";
-import { userStatus } from "@interfaces/contstants";
+import mongoose from 'mongoose';
+import { injectable, singleton } from 'tsyringe';
+import { userStatus } from '@interfaces/contstants';
+import { UserDocumentI } from '../interfaces/document.interface';
+import ModelI from '../interfaces/model.interface';
+
 @singleton()
 @injectable()
 export default class UserModel implements ModelI {
@@ -40,7 +41,7 @@ export default class UserModel implements ModelI {
         type: [
           {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Group",
+            ref: 'Group',
           },
         ],
       },
@@ -49,6 +50,6 @@ export default class UserModel implements ModelI {
       timestamps: true,
     }
   );
-  
-  model: mongoose.Model<any, {}> = mongoose.model<UserDocumentI>("users", this.schema);
+
+  model: mongoose.Model<any, {}> = mongoose.model<UserDocumentI>('users', this.schema);
 }

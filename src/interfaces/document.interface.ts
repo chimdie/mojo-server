@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 // import { PostI } from "./post.interface";
 
 export interface UserDocumentI extends mongoose.Document {

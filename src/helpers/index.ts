@@ -1,3 +1,3 @@
-import fakeISBN from "./makeISBN";
+import fakeISBN from './makeISBN';
 
 export { fakeISBN };

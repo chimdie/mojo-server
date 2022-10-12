@@ -1,24 +1,23 @@
-import "reflect-metadata";
-import express from "express";
-import dotenv from "dotenv";
-dotenv.config();
+import 'reflect-metadata';
+import express from 'express';
+import dotenv from 'dotenv';
 
-import connect from "@utils/connect"
-import log from "@utils/logger/index"
-import { routesV1 } from "./routes";
+import connect from '@utils/connect';
+import log from '@utils/logger/index';
+import { SERVER_PORT, SERVER_HOST } from './config';
 import appMiddleWares from './config/middlewares';
-import { SERVER_PORT, SERVER_HOST } from "./config";
+import { routesV1 } from './routes';
 
-
+dotenv.config();
 
 const app = express();
 app.use(appMiddleWares);
 
-const port = SERVER_PORT
-const host = SERVER_HOST
+const port = SERVER_PORT;
+const host = SERVER_HOST;
 
-app.get("/", (req, res) => {
-  res.send("Welcome!");
+app.get('/', (req, res) => {
+  res.send('Welcome!');
 });
 
 app.use(express.json());
@@ -32,7 +31,7 @@ app.listen(port, host, async () => {
   log.info(`Server listening at http://${host}:${port}`);
   await connect();
 
-  app.use("/api/v1", routesV1);
+  app.use('/api/v1', routesV1);
 });
 
 export default app;

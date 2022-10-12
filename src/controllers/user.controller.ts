@@ -1,11 +1,11 @@
-import { Request, Response } from "express";
-import { autoInjectable } from "tsyringe";
-import UserService from "../services/user.service";
-import BaseController from "./base.controller";
-import GroupService from "../services/group.service";
-import { userGroupInput, groupAddUserInput } from "@schemas/group.schema";
-import { CreateUserInput } from "@schemas/index";
-import { hash } from "argon2";
+import { Request, Response } from 'express';
+import { hash } from 'argon2';
+import { autoInjectable } from 'tsyringe';
+import { userGroupInput, groupAddUserInput } from '@schemas/group.schema';
+import { CreateUserInput } from '@schemas/index';
+import GroupService from '../services/group.service';
+import UserService from '../services/user.service';
+import BaseController from './base.controller';
 
 @autoInjectable()
 export default class UserController extends BaseController {
@@ -13,41 +13,36 @@ export default class UserController extends BaseController {
     super(service!);
   }
 
-  getUserGroups = async (
-    req: Request<userGroupInput["params"]>,
-    res: Response
-  ) => {
+  getUserGroups = async (req: Request<userGroupInput['params']>, res: Response) => {
     try {
-      let group = new GroupService();
-      let userGroups = await group.get({ owner: req.params.id });
+      const group = new GroupService();
+      const userGroups = await group.get({ owner: req.params.id });
 
       res.status(200).json(userGroups);
     } catch (e) {
-      return res.status(500).send({ message: "server error" });
+      return res.status(500).send({ message: 'server error' });
     }
   };
+
   addUserToGroup = async (
-    req: Request<groupAddUserInput["params"], {}, groupAddUserInput["body"]>,
+    req: Request<groupAddUserInput['params'], {}, groupAddUserInput['body']>,
     res: Response
   ) => {
     try {
-      let userId = req.params.userId;
+      const { userId } = req.params;
 
-      await this.service.findOneAndUpdate(
-        { id: userId },
-        { $push: { groups: req.body.group } }
-      );
+      await this.service.findOneAndUpdate({ id: userId }, { $push: { groups: req.body.group } });
     } catch (e) {
-      return res.status(500).send({ message: "server error" });
+      return res.status(500).send({ message: 'server error' });
     }
   };
 
-  signUp = async (req: Request<CreateUserInput["body"]>, res: Response) => {
+  signUp = async (req: Request<CreateUserInput['body']>, res: Response) => {
     const user = req.body;
-    const password = req.body.password;
+    const { password } = req.body;
     const hashedPassword = await hash(password);
 
-    let newUser = await this.service.post({
+    const newUser = await this.service.post({
       ...user,
       password: hashedPassword,
     });

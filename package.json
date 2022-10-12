@@ -1,5 +1,5 @@
 {
-  "name": "express-dependency-injection",
+  "name": "mojo-server",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -12,6 +12,8 @@
     "start": "cross-env NODE_ENV=production node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "check-types": "tsc --pretty --noEmit",
+    "lint": "eslint \"src/**/*.{js,ts,json}\"",
+    "lint:fix": "eslint --fix \"src/**/*.{js,ts,json}\"",
     "format": "prettier --write src/*",
     "prepare": "node -e \"if (process.env.NODE_ENV !== 'production'){process.exit(1)} \" || husky install"
   },
@@ -19,6 +21,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.40.0",
+    "@typescript-eslint/parser": "^5.40.0",
     "argon2": "^0.28.7",
     "config": "^3.3.7",
     "cors": "^2.8.5",
@@ -36,8 +40,8 @@
     "zod": "^3.17.9"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.0.3",
-    "@commitlint/config-conventional": "^17.0.3",
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@types/body-parser": "^1.19.2",
     "@types/config": "^0.0.41",
     "@types/cors": "^2.8.12",
@@ -51,6 +55,17 @@
     "@types/pino": "^7.0.5",
     "@types/request-ip": "^0.0.37",
     "concurrently": "^7.2.1",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-import-resolver-typescript": "^3.5.1",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.1",
+    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.1",
     "nodemon": "^2.0.16",
     "prettier": "^2.7.1",

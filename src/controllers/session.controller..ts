@@ -21,9 +21,8 @@ export default class SessionController extends BaseController {
   login = async (req: Request<CreateSessionInput["body"]>, res: Response) => {
     // let group = new GroupService();
 
-    // console.log(group)
     const userService = new UserService();
-    console.log(userService);
+
     const user = await userService.getOne<UserDocumentI>({
       emailAddress: req.body.emailAddress,
     });

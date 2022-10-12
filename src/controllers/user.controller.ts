@@ -46,7 +46,7 @@ export default class UserController extends BaseController {
     const user = req.body;
     const password = req.body.password;
     const hashedPassword = await hash(password);
-    console.log(hashedPassword);
+
     let newUser = await this.service.post({
       ...user,
       password: hashedPassword,

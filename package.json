@@ -32,6 +32,7 @@
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.21",
     "mongoose": "^5.9.7",
+    "normalize-mongoose": "^1.0.0",
     "pino": "^8.3.0",
     "pino-pretty": "^8.1.0",
     "reflect-metadata": "^0.1.13",

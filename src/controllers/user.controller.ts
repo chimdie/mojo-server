@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { hash } from 'argon2';
 import { autoInjectable } from 'tsyringe';
+import { GroupDocument } from '@interfaces/index';
 import { userGroupInput, groupAddUserInput } from '@schemas/group.schema';
 import { CreateUserInput } from '@schemas/index';
 import GroupService from '../services/group.service';
@@ -16,9 +17,9 @@ export default class UserController extends BaseController {
   getUserGroups = async (req: Request<userGroupInput['params']>, res: Response) => {
     try {
       const group = new GroupService();
-      const userGroups = await group.get({ owner: req.params.id });
+      const userGroups = await group.get<GroupDocument>({ owner: req.params.id });
 
-      res.status(200).json(userGroups);
+      return res.status(200).json(userGroups);
     } catch (e) {
       return res.status(500).send({ message: 'server error' });
     }
@@ -31,7 +32,7 @@ export default class UserController extends BaseController {
     try {
       const { userId } = req.params;
 
-      await this.service.findOneAndUpdate({ id: userId }, { $push: { groups: req.body.group } });
+      return await this.service.findOneAndUpdate({ id: userId }, { $push: { groups: req.body.group } });
     } catch (e) {
       return res.status(500).send({ message: 'server error' });
     }

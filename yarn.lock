@@ -2960,6 +2960,11 @@
   dependencies:
     "abbrev" "1"
 
+"normalize-mongoose@^1.0.0":
+  "integrity" "sha512-06gKa6YoKRpV4QK0qKI+VZPuVicnmrKyz62QdltvuYOxCbPTZK6Hao0e5s9z1v2iYY1jtZUdam8cgUyILWvwZw=="
+  "resolved" "https://registry.npmjs.org/normalize-mongoose/-/normalize-mongoose-1.0.0.tgz"
+  "version" "1.0.0"
+
 "normalize-package-data@^2.5.0":
   "integrity" "sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA=="
   "resolved" "https://registry.npmjs.org/normalize-package-data/-/normalize-package-data-2.5.0.tgz"

@@ -2,7 +2,6 @@ import mongoose from 'mongoose';
 // import { PostI } from "./post.interface";
 
 export interface UserDocumentI extends mongoose.Document {
-  id: string;
   emailAddress: string;
   fullName: string;
   password: string;
@@ -12,7 +11,7 @@ export interface UserDocumentI extends mongoose.Document {
 }
 
 export interface SessionDocumentI extends mongoose.Document {
-  user: UserDocumentI['_id'];
+  user: UserDocumentI['id'];
   valid: boolean;
   createdAt: Date;
   updatedAt: Date;

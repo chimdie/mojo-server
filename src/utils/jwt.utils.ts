@@ -25,6 +25,7 @@ export function verifyJwt(token: string, keyName: 'accessToken.publicKey' | 'ref
       decoded,
     };
   } catch (e: any) {
+    // eslint-disable-next-line no-console
     console.error(e);
     return {
       valid: false,

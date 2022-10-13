@@ -9,13 +9,6 @@ import ModelI from '../interfaces/model.interface';
 export default class UserModel implements ModelI {
   schema: mongoose.Schema<any> = new mongoose.Schema(
     {
-      id: {
-        type: String,
-        required: true,
-        unique: true,
-        index: true,
-        default: mongoose.Types.ObjectId,
-      },
       fullName: {
         type: String,
         required: true,
@@ -51,5 +44,5 @@ export default class UserModel implements ModelI {
     }
   );
 
-  model: mongoose.Model<any, {}> = mongoose.model<UserDocumentI>('users', this.schema);
+  model: mongoose.Model<any, {}> = mongoose.model<UserDocumentI>('User', this.schema);
 }

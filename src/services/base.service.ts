@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import mongoose, { FilterQuery, QueryOptions } from 'mongoose';
 import ModelI from '@interfaces/model.interface';
 
@@ -19,8 +20,8 @@ export default class BaseService<T> {
 
   // loggingIdentity<T extends Lengthwise>(arg: T): T {};
 
-  async get<T>(filters?: FilterQuery<T>, options?: QueryOptions): Promise<T[]> {
-    const resource = (await this.model.find(filters!, options)) as T[];
+  async get<I>(filters: FilterQuery<T> = {}, options?: QueryOptions): Promise<I[]> {
+    const resource = (await this.model.find(filters, options)) as I[];
     return resource;
   }
 
@@ -29,12 +30,16 @@ export default class BaseService<T> {
     return resource;
   }
 
-  getById = async (id: string, options?: QueryOptions): Promise<T> => {
-    const resource = (await this.model.findOne({
-      id: mongoose.Types.ObjectId(id),
-    })) as T;
+  async getById<I>(id: string, options?: QueryOptions): Promise<I> {
+    const resource = (await this.model.findOne(
+      {
+        _id: mongoose.Types.ObjectId(id),
+      },
+      {},
+      options
+    )) as I;
     return resource;
-  };
+  }
 
   findOneAndUpdate = async (query = {}, update = {}, options?: QueryOptions): Promise<T[]> => {
     const resource = (await this.model.findOneAndUpdate(query, update, options!)) as T[];
@@ -47,6 +52,16 @@ export default class BaseService<T> {
   };
 
   delete = (id: string): void => {
-    return this.model.remove({ id: mongoose.Types.ObjectId(id) });
+    return this.model.deleteOne({ _id: mongoose.Types.ObjectId(id) });
   };
+
+  async addToCollection<I>(id: string, input: object, options?: QueryOptions): Promise<I[]> {
+    return (await this.model.findByIdAndUpdate(
+      id,
+      {
+        $push: { ...input },
+      },
+      options
+    )) as I[];
+  }
 }

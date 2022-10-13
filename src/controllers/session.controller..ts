@@ -24,7 +24,7 @@ export default class SessionController extends BaseController {
       emailAddress: req.body.emailAddress,
     });
 
-    if (user && user._id) {
+    if (user && user.id) {
       const { password } = req.body;
       const hashedPassword = user.password;
 
@@ -32,14 +32,14 @@ export default class SessionController extends BaseController {
 
       if (isPasswordCorrect) {
         const session = await this.service.post({
-          user: user._id,
+          user: user.id,
           userAgent: req.get('user-agent') || '',
         });
 
         const sessionPayload = {
           fullName: user.fullName,
           emailAddress: user.emailAddress,
-          session: session._id,
+          session: session.id,
         };
         const accessToken = signJwt(
           sessionPayload,

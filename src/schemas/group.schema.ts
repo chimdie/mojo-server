@@ -1,4 +1,4 @@
-import { object, string, number, array, TypeOf } from 'zod';
+import { object, string, number, TypeOf } from 'zod';
 
 const params = {
   params: object({
@@ -62,7 +62,9 @@ export const groupAddUser = object({
 });
 export const addMembersScheam = object({
   body: object({
-    members: string().array().nonempty(),
+    member: string({
+      required_error: 'user id is required',
+    }),
   }),
 });
 

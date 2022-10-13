@@ -1,6 +1,6 @@
 import { get } from 'lodash';
 import { autoInjectable } from 'tsyringe';
-import { SessionDocumentI } from '@interfaces/document.interface';
+import { SessionDocumentI, UserDocumentI } from '@interfaces/document.interface';
 import SessionModel from '@models/userSession.model';
 import { verifyJwt, signJwt } from '@utils/jwt.utils';
 import { ACCESS_TOKEN_TIME_TO_LEAVE } from 'src/config';
@@ -27,7 +27,7 @@ export default class SessionService extends BaseService<SessionDocumentI> {
     //   { lean: true }
     // );
     const userService = new UserService();
-    const user = await userService.getById(session.user, { lean: true });
+    const user = await userService.getById<UserDocumentI>(session.user, { lean: true });
 
     if (!user) return false;
 

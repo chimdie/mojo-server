@@ -9,13 +9,6 @@ import ModelI from '../interfaces/model.interface';
 export default class GroupModel implements ModelI {
   schema: mongoose.Schema<any> = new mongoose.Schema(
     {
-      id: {
-        type: String,
-        required: true,
-        unique: true,
-        index: true,
-        default: mongoose.Types.ObjectId,
-      },
       name: {
         type: String,
         required: true,

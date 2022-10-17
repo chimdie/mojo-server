@@ -9,7 +9,12 @@ const host = SERVER_HOST;
 const app = express();
 app.use(
   cors({
-    origin: [`http://${host}:${port}`, `http://${host}:8080`, `http://localhost:8081`],
+    origin: [
+      `http://${host}:${port}`,
+      `http://${host}:8080`,
+      `http://localhost:8081`,
+      `http://localhost:3000`,
+    ],
   })
 );
 app.use(express.urlencoded({ extended: true }));

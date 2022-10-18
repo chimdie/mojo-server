@@ -1,7 +1,8 @@
 import { Request, Response } from 'express';
 import { autoInjectable } from 'tsyringe';
+import { groupStatus } from '@interfaces/contstants';
 import { GroupDocument } from '@interfaces/document.interface';
-import { GetGroupInput, MemberInput } from '@schemas/index';
+import { GetGroupInput, groupAddUserInput, MemberInput } from '@schemas/index';
 import GroupService from '../services/group.service';
 import BaseController from './base.controller';
 
@@ -12,24 +13,45 @@ export default class UserController extends BaseController {
   }
 
   viewMembers = async (req: Request<GetGroupInput['params']>, res: Response) => {
-    const groupId = req.params.id;
+    const { groupId } = req.params;
 
     const allGroupMembers = await this.service.getById<GroupDocument>(groupId, {
       populate: { path: 'members' },
       lean: true,
     });
-
     return res.status(200).json(allGroupMembers);
   };
 
-  addNewMembers = async (req: Request<GetGroupInput['params'], {}, MemberInput['body']>, res: Response) => {
-    const groupId = req.params.id;
-    const newMembersIds = req.body.member;
+  addNewMember = async (
+    req: Request<groupAddUserInput['params'], {}, MemberInput['body']>,
+    res: Response
+  ) => {
+    const { groupId } = req.params;
+    const newMembersId = req.body.member;
+    const group = await this.service.getById<GroupDocument>(groupId);
 
-    const newMember = await this.service.addToCollection<GroupDocument>(
+    if (group && group.status === groupStatus.OPEN) {
+      const newMember = await this.service.addToCollection<GroupDocument>(
+        groupId,
+        { members: newMembersId },
+        { new: true, useFindAndModify: false }
+      );
+      return res.status(201).json(newMember);
+    }
+
+    return res
+      .status(423)
+      .json({ message: 'Sorry You can not join this group, this group has been locked by the admin' });
+  };
+
+  removeMember = async (req: Request<GetGroupInput['params'], {}, MemberInput['body']>, res: Response) => {
+    const { groupId } = req.params;
+    const newMembersId = req.body.member;
+
+    const newMember = await this.service.removeFromCollection<GroupDocument>(
       groupId,
-      { members: newMembersIds },
-      { new: false, useFindAndModify: false }
+      { members: [newMembersId] },
+      { new: true, useFindAndModify: false }
     );
     return res.status(201).json(newMember);
   };

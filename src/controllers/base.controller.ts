@@ -44,9 +44,14 @@ export default class BaseController {
 
   findOneAndUpdate = async (req: Request, res: Response) => {
     const query = { ...req.params, ...req.query };
+    if (query.id) {
+      query._id = query.id;
+      delete query.id;
+    }
     try {
       const resource = await this.service.findOneAndUpdate(query, req.body, {
         lean: true,
+        new: true,
       });
       return res.send(resource);
     } catch (error: any) {
@@ -56,6 +61,10 @@ export default class BaseController {
 
   updateOne = async (req: Request, res: Response) => {
     const query = { ...req.params, ...req.query };
+    if (query.id) {
+      query._id = query.id;
+      delete query.id;
+    }
     try {
       const resource = await this.service.updateOne(
         query,

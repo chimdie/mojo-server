@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { hash } from 'argon2';
 import { autoInjectable } from 'tsyringe';
 import { GroupDocument } from '@interfaces/index';
-import { userGroupInput, groupAddUserInput } from '@schemas/group.schema';
+import { userGroupInput } from '@schemas/group.schema';
 import { CreateUserInput } from '@schemas/index';
 import GroupService from '../services/group.service';
 import UserService from '../services/user.service';
@@ -25,18 +25,18 @@ export default class UserController extends BaseController {
     }
   };
 
-  addUserToGroup = async (
-    req: Request<groupAddUserInput['params'], {}, groupAddUserInput['body']>,
-    res: Response
-  ) => {
-    try {
-      const { userId } = req.params;
+  // addUserToGroup = async (
+  //   req: Request<groupAddUserInput['params'], {}, groupAddUserInput['body']>,
+  //   res: Response
+  // ) => {
+  //   try {
+  //     const { userId } = req.params;
 
-      return await this.service.findOneAndUpdate({ id: userId }, { $push: { groups: req.body.group } });
-    } catch (e) {
-      return res.status(500).send({ message: 'server error' });
-    }
-  };
+  //     return await this.service.findOneAndUpdate({ id: userId }, { $push: { groups: req.body.group } });
+  //   } catch (e) {
+  //     return res.status(500).send({ message: 'server error' });
+  //   }
+  // };
 
   signUp = async (req: Request<CreateUserInput['body']>, res: Response) => {
     const user = req.body;

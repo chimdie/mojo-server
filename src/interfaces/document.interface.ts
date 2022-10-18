@@ -19,7 +19,9 @@ export interface SessionDocumentI extends mongoose.Document {
 
 export interface GroupDocument extends mongoose.Document {
   name: string;
-  author: UserDocumentI['id'];
+  owner: UserDocumentI['id'];
+  status: string;
+  isPrivate: boolean;
   monthlyDepositAmount: number;
   description?: string;
   createdAt: Date;

@@ -2,7 +2,7 @@ import { object, string, number, TypeOf } from 'zod';
 
 const params = {
   params: object({
-    id: string({
+    groupId: string({
       required_error: 'Group id is required',
     }),
   }),
@@ -50,16 +50,17 @@ export const getUserGroups = object({
 
 export const groupAddUser = object({
   params: object({
-    userId: string({
-      required_error: 'user id is required',
-    }),
-  }),
-  body: object({
-    group: string({
+    groupId: string({
       required_error: 'group id is required',
     }),
   }),
+  body: object({
+    member: string({
+      required_error: 'user id is required',
+    }),
+  }),
 });
+
 export const addMembersScheam = object({
   body: object({
     member: string({

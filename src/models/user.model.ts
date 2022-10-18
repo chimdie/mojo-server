@@ -27,7 +27,7 @@ export default class UserModel implements ModelI {
       },
       status: {
         type: String,
-        defaultTo: userStatus.ACTIVE,
+        default: userStatus.ACTIVE,
         enum: [userStatus.ACTIVE, userStatus.BANNED],
       },
       groups: {

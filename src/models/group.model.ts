@@ -19,12 +19,12 @@ export default class GroupModel implements ModelI {
       },
       status: {
         type: String,
-        defaultTo: groupStatus.OPEN,
+        default: groupStatus.OPEN,
         enum: [groupStatus.OPEN, groupStatus.CLOSED],
       },
       isPrivate: {
         type: Boolean,
-        defaultTo: false,
+        default: false,
       },
       owner: {
         type: mongoose.Schema.Types.ObjectId,

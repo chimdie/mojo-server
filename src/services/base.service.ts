@@ -31,13 +31,7 @@ export default class BaseService<T> {
   }
 
   async getById<I>(id: string, options?: QueryOptions): Promise<I> {
-    const resource = (await this.model.findOne(
-      {
-        _id: mongoose.Types.ObjectId(id),
-      },
-      {},
-      options
-    )) as I;
+    const resource = (await this.model.findOne({ _id: mongoose.Types.ObjectId(id) }, {}, options)) as I;
     return resource;
   }
 
@@ -60,6 +54,18 @@ export default class BaseService<T> {
       id,
       {
         $push: { ...input },
+      },
+      options
+    )) as I[];
+  }
+
+  async removeFromCollection<I>(id: string, input: object, options?: QueryOptions): Promise<I[]> {
+    return (await this.model.findByIdAndUpdate(
+      id,
+      {
+        $pullAll: {
+          ...input,
+        },
       },
       options
     )) as I[];

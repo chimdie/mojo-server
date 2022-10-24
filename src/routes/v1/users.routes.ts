@@ -8,7 +8,7 @@ const userRouter = Router();
 const userController = new UserController();
 const sessionController = new SessionController();
 
-userRouter.get('/', userController.get);
+userRouter.get('/', userController.getAllUsers);
 userRouter.post('/signup', validate(createUserSchema), userController.signUp);
 userRouter.post('/login', validate(createSessionSchema), sessionController.login);
 userRouter.get('/:id', userController.getById);

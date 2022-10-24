@@ -3,6 +3,7 @@ import { autoInjectable } from 'tsyringe';
 import { groupStatus } from '@interfaces/contstants';
 import { GroupDocument } from '@interfaces/document.interface';
 import { GetGroupInput, groupAddUserInput, MemberInput } from '@schemas/index';
+import UserService from '@services/user.service';
 import GroupService from '../services/group.service';
 import BaseController from './base.controller';
 
@@ -34,6 +35,13 @@ export default class UserController extends BaseController {
       const newMember = await this.service.addToCollection<GroupDocument>(
         groupId,
         { members: newMembersId },
+        { new: true, useFindAndModify: false }
+      );
+      const userService = new UserService();
+
+      await userService.addToCollection<GroupDocument>(
+        newMembersId,
+        { groups: groupId },
         { new: true, useFindAndModify: false }
       );
       return res.status(201).json(newMember);

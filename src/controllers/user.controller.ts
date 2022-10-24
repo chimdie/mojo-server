@@ -25,19 +25,6 @@ export default class UserController extends BaseController {
     }
   };
 
-  // addUserToGroup = async (
-  //   req: Request<groupAddUserInput['params'], {}, groupAddUserInput['body']>,
-  //   res: Response
-  // ) => {
-  //   try {
-  //     const { userId } = req.params;
-
-  //     return await this.service.findOneAndUpdate({ id: userId }, { $push: { groups: req.body.group } });
-  //   } catch (e) {
-  //     return res.status(500).send({ message: 'server error' });
-  //   }
-  // };
-
   signUp = async (req: Request<CreateUserInput['body']>, res: Response) => {
     const user = req.body;
     const { password } = req.body;
@@ -48,6 +35,17 @@ export default class UserController extends BaseController {
       password: hashedPassword,
     });
     return res.status(201).json(newUser);
+  };
+
+  getAllUsers = async (req: Request, res: Response) => {
+    const users = await this.service.get(
+      {},
+      {
+        populate: { path: 'groups' },
+        // lean: true,
+      }
+    );
+    return res.status(201).json(users);
   };
 
   // deleteUser = async (req: Request, res: Response) => {

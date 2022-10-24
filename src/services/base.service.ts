@@ -21,7 +21,7 @@ export default class BaseService<T> {
   // loggingIdentity<T extends Lengthwise>(arg: T): T {};
 
   async get<I>(filters: FilterQuery<T> = {}, options?: QueryOptions): Promise<I[]> {
-    const resource = (await this.model.find(filters, options)) as I[];
+    const resource = (await this.model.find(filters, {}, options)) as I[];
     return resource;
   }
 

@@ -11,3 +11,6 @@ export const ACCESS_TOKEN_TIME_TO_LEAVE = config.get('accessToken.accessTokenTtl
 export const REFRESH_PRIVATE_KEY = config.get('refreshToken.privateKey') as string;
 export const REFRESH_PUBLIC_KEY = config.get('refreshToken.publicKey') as string;
 export const REFRESH_TOKEN_TIME_TO_LEAVE = config.get('refreshToken.refreshTokenTtl') as string;
+
+export const FLW_PUBLIC_KEY = config.get('flw.publicKey') as string;
+export const FLW_SECRET_KEY = config.get('flw.secretKey') as string;

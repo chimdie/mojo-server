@@ -7,7 +7,7 @@ const userRouter = Router();
 const groupController = new GroupController();
 
 userRouter.get('/', groupController.get);
-userRouter.post('/', validate(createGroupSchema), groupController.post);
+userRouter.post('/', validate(createGroupSchema), groupController.createBankAccount, groupController.post);
 userRouter.get('/:id', groupController.getById);
 
 // get all group members

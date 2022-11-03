@@ -389,6 +389,13 @@
     "@types/qs" "*"
     "@types/serve-static" "*"
 
+"@types/flutterwave-node@^1.0.1":
+  "integrity" "sha512-WAw9wbfInNpsJva4QPgf/ljK6yZ8leYO2eqvZau9c7OwlZahotxIPfIRWcRwyJF12/onOaGb10kDoIkClzB5jg=="
+  "resolved" "https://registry.npmjs.org/@types/flutterwave-node/-/flutterwave-node-1.0.1.tgz"
+  "version" "1.0.1"
+  dependencies:
+    "axios" "^0.21.0"
+
 "@types/json-schema@^7.0.9":
   "integrity" "sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ=="
   "resolved" "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.11.tgz"
@@ -817,7 +824,7 @@
   "resolved" "https://registry.npmjs.org/aws4/-/aws4-1.11.0.tgz"
   "version" "1.11.0"
 
-"axios@^0.21.4":
+"axios@^0.21.0", "axios@^0.21.4":
   "integrity" "sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg=="
   "resolved" "https://registry.npmjs.org/axios/-/axios-0.21.4.tgz"
   "version" "0.21.4"

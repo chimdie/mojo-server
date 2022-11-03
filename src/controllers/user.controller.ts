@@ -27,13 +27,16 @@ export default class UserController extends BaseController {
 
   signUp = async (req: Request<CreateUserInput['body']>, res: Response) => {
     const user = req.body;
+    const fullName = `${user.lastName} ${user.firstName}`;
     const { password } = req.body;
     const hashedPassword = await hash(password);
 
     const newUser = await this.service.post({
       ...user,
+      fullName,
       password: hashedPassword,
     });
+
     return res.status(201).json(newUser);
   };
 

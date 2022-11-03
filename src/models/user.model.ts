@@ -13,10 +13,15 @@ export default class UserModel implements ModelI {
         type: String,
         required: true,
       },
+      bvn: {
+        type: String,
+        required: false,
+      },
       emailAddress: {
         type: String,
         required: true,
       },
+      phoneNumber: { type: String, required: false },
       password: {
         type: String,
         required: true,

@@ -13,6 +13,26 @@ export default class GroupModel implements ModelI {
         type: String,
         required: true,
       },
+      flw_ref: {
+        type: String,
+        // required: true,
+      },
+      order_ref: {
+        type: String,
+        required: true,
+      },
+      account_number: {
+        type: String,
+        required: true,
+      },
+      bank_name: {
+        type: String,
+        required: true,
+      },
+      expiry_date: {
+        type: String,
+      },
+
       monthlyDepositAmount: {
         type: Number,
         required: true,

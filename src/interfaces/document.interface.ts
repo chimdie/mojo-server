@@ -4,6 +4,8 @@ import mongoose from 'mongoose';
 export interface UserDocumentI extends mongoose.Document {
   emailAddress: string;
   fullName: string;
+  bvn: string;
+  phoneNumber: string;
   password: string;
   createdAt: Date;
   updatedAt: Date;

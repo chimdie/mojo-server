@@ -3,8 +3,17 @@ import { PASSWORD_MIN_LENGTH } from '@utils/constants';
 
 export const createUserSchema = object({
   body: object({
-    fullName: string({
-      required_error: 'Full name is required',
+    firstName: string({
+      required_error: 'First name is required',
+    }),
+    lastName: string({
+      required_error: 'Last name is required',
+    }),
+    bvn: string({
+      required_error: 'BVN is required',
+    }),
+    phoneNumber: string({
+      required_error: 'Phone number is required',
     }),
     password: string({
       required_error: 'Password is required',

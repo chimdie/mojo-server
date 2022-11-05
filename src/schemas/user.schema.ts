@@ -32,4 +32,16 @@ export const createUserSchema = object({
   }),
 });
 
+export const verifyBankAccountSchema = object({
+  body: object({
+    accountNumber: string({
+      required_error: 'Account Number is required',
+    }),
+    bankCode: string({
+      required_error: 'Bank code is required',
+    }),
+  }),
+});
+
 export type CreateUserInput = Omit<TypeOf<typeof createUserSchema>, 'body.confirmPassword'>;
+export type VerifyBankAccountInput = TypeOf<typeof verifyBankAccountSchema>;

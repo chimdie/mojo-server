@@ -17,6 +17,26 @@ export default class UserModel implements ModelI {
         type: String,
         required: false,
       },
+      flw_ref: {
+        type: String,
+        // required: true,
+      },
+      order_ref: {
+        type: String,
+        required: true,
+      },
+      account_number: {
+        type: String,
+        required: true,
+      },
+      bank_name: {
+        type: String,
+        required: true,
+      },
+      expiry_date: {
+        type: String,
+      },
+
       emailAddress: {
         type: String,
         required: true,

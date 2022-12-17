@@ -16,6 +16,9 @@ export default class UserController extends BaseController {
     super(service!);
   }
 
+  /**
+   * create gruop bank account
+   */
   createBankAccount = async (req: Request, res: Response, next: NextFunction) => {
     const userService = new UserService();
 
@@ -31,17 +34,20 @@ export default class UserController extends BaseController {
       bvn: Number(groupOwner.bvn),
       tx_ref: `${groupOwner.fullName.split(' ').join('-')}-${groupOwner._id}`,
     };
-    const { data } = await flw.VirtualAcct.create(payload);
-
-    req.body = {
-      ...req.body,
-      flw_ref: data.flw_ref,
-      order_ref: data.order_ref,
-      account_number: data.account_number,
-      bank_name: data.bank_name,
-      expiry_date: data.expiry_date,
-    };
-    next();
+    try {
+      const { data } = await flw.VirtualAcct.create(payload);
+      req.body = {
+        ...req.body,
+        flw_ref: data.flw_ref,
+        order_ref: data.order_ref,
+        account_number: data.account_number,
+        bank_name: data.bank_name,
+        expiry_date: data.expiry_date,
+      };
+      next();
+    } catch {
+      res.status(400).json({ message: 'Unable to create bank account' });
+    }
   };
 
   viewMembers = async (req: Request<GetGroupInput['params']>, res: Response) => {

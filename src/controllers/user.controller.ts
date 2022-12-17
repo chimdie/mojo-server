@@ -33,11 +33,36 @@ export default class UserController extends BaseController {
   signUp = async (req: Request<CreateUserInput['body']>, res: Response) => {
     const user = req.body;
     const fullName = `${user.lastName} ${user.firstName}`;
-    const { password } = req.body;
+    const { password, phoneNumber, bvn, emailAddress } = req.body;
     const hashedPassword = await hash(password);
+    const flw = new Flutterwave(FLW_PUBLIC_KEY, FLW_SECRET_KEY);
 
+    const payload = {
+      phonenumber: phoneNumber,
+      firstname: fullName.split(' ')[0],
+      lastname: fullName.split(' ')[1],
+      email: emailAddress,
+      is_permanent: true,
+      bvn: Number(bvn),
+      tx_ref: `${fullName.split(' ').join('-')}-${phoneNumber}`,
+    };
+    let account;
+    try {
+      const { data } = await flw.VirtualAcct.create(payload);
+
+      account = {
+        flw_ref: data.flw_ref,
+        order_ref: data.order_ref,
+        account_number: data.account_number,
+        bank_name: data.bank_name,
+        expiry_date: data.expiry_date,
+      };
+    } catch {
+      res.status(400).json({ message: 'Unable to account' });
+    }
     const newUser = await this.service.post({
       ...user,
+      ...account,
       fullName,
       password: hashedPassword,
     });

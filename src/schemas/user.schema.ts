@@ -15,11 +15,17 @@ export const createUserSchema = object({
     phoneNumber: string({
       required_error: 'Phone number is required',
     }),
+    bankName: string({
+      required_error: 'Bank Name is required',
+    }),
     password: string({
       required_error: 'Password is required',
     }).min(PASSWORD_MIN_LENGTH, 'Password is too short'),
     confirmPassword: string({
       required_error: 'Confirm password is required',
+    }),
+    bankAccountNumber: string({
+      required_error: 'Bank Account is required',
     }),
     emailAddress: string({
       required_error: 'Email address is required',

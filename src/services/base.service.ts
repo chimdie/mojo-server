@@ -14,6 +14,8 @@ export default class BaseService<T> {
       const resourse = await this.model.create(data);
       return resourse;
     } catch (error: any) {
+      // eslint-disable-next-line no-console
+      console.log({ error });
       throw new Error(error);
     }
   };
@@ -40,7 +42,7 @@ export default class BaseService<T> {
     return resource;
   };
 
-  updateOne = async (query = {}, update = {}, options: QueryOptions): Promise<T[]> => {
+  updateOne = async (query = {}, update = {}, options?: QueryOptions): Promise<T[]> => {
     const resource = (await this.model.updateOne(query, update, options)) as T[];
     return resource;
   };

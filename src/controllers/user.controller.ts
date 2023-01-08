@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { Request, Response } from 'express';
 import { hash } from 'argon2';
 import { autoInjectable } from 'tsyringe';
@@ -33,41 +34,19 @@ export default class UserController extends BaseController {
   signUp = async (req: Request<CreateUserInput['body']>, res: Response) => {
     const user = req.body;
     const fullName = `${user.lastName} ${user.firstName}`;
-    const { password, phoneNumber, bvn, emailAddress } = req.body;
+    const { password } = req.body;
     const hashedPassword = await hash(password);
-    const flw = new Flutterwave(FLW_PUBLIC_KEY, FLW_SECRET_KEY);
-
-    const payload = {
-      phonenumber: phoneNumber,
-      firstname: fullName.split(' ')[0],
-      lastname: fullName.split(' ')[1],
-      email: emailAddress,
-      is_permanent: true,
-      bvn: Number(bvn),
-      tx_ref: `${fullName.split(' ').join('-')}-${phoneNumber}`,
-    };
-    let account;
     try {
-      const { data } = await flw.VirtualAcct.create(payload);
+      const newUser = await this.service.post({
+        ...user,
+        fullName,
+        password: hashedPassword,
+      });
 
-      account = {
-        flw_ref: data.flw_ref,
-        order_ref: data.order_ref,
-        account_number: data.account_number,
-        bank_name: data.bank_name,
-        expiry_date: data.expiry_date,
-      };
-    } catch {
-      res.status(400).json({ message: 'Unable to account' });
+      return res.status(201).json(newUser);
+    } catch (err) {
+      return res.status(400).json({ message: 'Unable to create account : ', err });
     }
-    const newUser = await this.service.post({
-      ...user,
-      ...account,
-      fullName,
-      password: hashedPassword,
-    });
-
-    return res.status(201).json(newUser);
   };
 
   getAllUsers = async (req: Request, res: Response) => {
@@ -91,6 +70,8 @@ export default class UserController extends BaseController {
 
     this.flw.Misc.verify_Account(details)
       .then((response: any) => {
+        // eslint-disable-next-line no-console
+        console.log(response);
         return res.status(201).json(response);
       })
       .catch((err: any) => {

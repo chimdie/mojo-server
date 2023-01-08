@@ -21,6 +21,12 @@ export const createGroupSchema = object({
     name: string({
       required_error: 'Group Name is required',
     }),
+    bankName: string({
+      required_error: 'Bank Name is required',
+    }),
+    bankAccountNumber: string({
+      required_error: 'Bank Account is required',
+    }),
     monthlyDepositAmount: number({
       required_error: 'Monthly Deposit is required',
     }),
@@ -68,6 +74,27 @@ export const addMembersScheam = object({
     }),
   }),
 });
+export const payment = object({
+  body: object({
+    userId: string({
+      required_error: 'user id is required',
+    }),
+    groupId: string({
+      required_error: 'group id is required',
+    }),
+    amount: number({
+      required_error: 'amount is required',
+    }),
+  }),
+});
+
+export const wallet = object({
+  body: object({
+    group: string({
+      required_error: 'group is required',
+    }),
+  }),
+});
 
 export type MemberInput = TypeOf<typeof addMembersScheam>;
 
@@ -77,3 +104,4 @@ export type userGroupInput = TypeOf<typeof getUserGroups>;
 export type groupAddUserInput = TypeOf<typeof groupAddUser>;
 
 export type createBookInput = TypeOf<typeof createGroupSchema>;
+export type paymentInput = TypeOf<typeof payment>;

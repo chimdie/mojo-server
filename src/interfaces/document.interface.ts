@@ -9,9 +9,9 @@ export interface UserDocumentI extends mongoose.Document {
   password: string;
   createdAt: Date;
   updatedAt: Date;
+  totalWalletAmount: number;
   comparePassword(password: string): Promise<boolean>;
 }
-
 export interface SessionDocumentI extends mongoose.Document {
   user: UserDocumentI['id'];
   valid: boolean;
@@ -28,4 +28,9 @@ export interface GroupDocument extends mongoose.Document {
   description?: string;
   createdAt: Date;
   updatedAt: Date;
+}
+export interface WalletDocumentI extends mongoose.Document {
+  amount: string;
+  transaction: string;
+  group: GroupDocument['id'];
 }

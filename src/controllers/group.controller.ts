@@ -2,9 +2,11 @@ import { NextFunction, Request, Response } from 'express';
 import { autoInjectable } from 'tsyringe';
 import { groupStatus } from '@interfaces/contstants';
 import { GroupDocument, UserDocumentI } from '@interfaces/document.interface';
-import { GetGroupInput, groupAddUserInput, MemberInput } from '@schemas/index';
+import { GetGroupInput, groupAddUserInput, MemberInput, paymentInput } from '@schemas/index';
 import UserService from '@services/user.service';
+import WalletService from '@services/wallet.service';
 import { FLW_PUBLIC_KEY, FLW_SECRET_KEY } from 'src/config';
+import { WalletDocumentI } from '../../dist/interfaces/document.interface';
 import GroupService from '../services/group.service';
 import BaseController from './base.controller';
 
@@ -82,6 +84,55 @@ export default class UserController extends BaseController {
         { new: true, useFindAndModify: false }
       );
       return res.status(201).json(newMember);
+    }
+
+    return res
+      .status(423)
+      .json({ message: 'Sorry You can not join this group, this group has been locked by the admin' });
+  };
+
+  makePayment = async (req: Request<{}, {}, paymentInput['body']>, res: Response) => {
+    const { groupId, userId, amount } = req.body;
+    const group = await this.service.getById<GroupDocument>(groupId);
+
+    if (group && group.status === groupStatus.OPEN) {
+      await this.service.addToCollection<GroupDocument>(
+        groupId,
+        { transaction: userId },
+        { new: true, useFindAndModify: false }
+      );
+      const userService = new UserService();
+      const walletService = new WalletService();
+
+      const user = await userService.getOne<UserDocumentI>({ _id: userId });
+
+      await userService.updateOne(
+        { _id: userId },
+        {
+          $set: { totalWalletAmount: user.totalWalletAmount + amount },
+        },
+        { lean: true }
+      );
+
+      const wallet = await walletService.getOne<WalletDocumentI>({ group: groupId });
+      // eslint-disable-next-line no-console
+      console.log({ wallet });
+      await walletService.updateOne(
+        { _id: wallet._id },
+        {
+          $set: { amount: wallet.amount + amount },
+        },
+        { lean: true }
+      );
+      walletService.addToCollection(
+        wallet._id,
+        { transactions: userId },
+        { new: true, useFindAndModify: false }
+      );
+
+      return res.status(201).json({
+        message: 'Payment Sucessfull',
+      });
     }
 
     return res

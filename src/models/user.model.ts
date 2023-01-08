@@ -17,19 +17,22 @@ export default class UserModel implements ModelI {
         type: String,
         required: false,
       },
-      flw_ref: {
+      totalWalletAmount: {
+        type: Number,
+        default: 0,
+      },
+      flwRef: {
         type: String,
         // required: true,
       },
-      order_ref: {
+      orderRef: {
+        type: String,
+      },
+      bankAccountNumber: {
         type: String,
         required: true,
       },
-      account_number: {
-        type: String,
-        required: true,
-      },
-      bank_name: {
+      bankName: {
         type: String,
         required: true,
       },

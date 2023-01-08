@@ -16,7 +16,9 @@ export default class BaseController {
 
       return res.send(resource);
     } catch (error: any) {
-      return res.status(500).send({ message: error.message });
+      // eslint-disable-next-line no-console
+      console.log({ error });
+      throw new Error(error);
     }
   };
 

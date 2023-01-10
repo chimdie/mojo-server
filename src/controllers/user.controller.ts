@@ -49,6 +49,17 @@ export default class UserController extends BaseController {
     }
   };
 
+  // getUserById = async (req: Request, res: Response) => {
+  //   const users = await this.service.getOne(
+  //     { _id: req.params.id },
+  //     {
+  //       populate: 'groups',
+  //       // lean: true,
+  //     }
+  //   );
+  //   return res.status(201).json(users);
+  // };
+
   getAllUsers = async (req: Request, res: Response) => {
     const users = await this.service.get(
       {},

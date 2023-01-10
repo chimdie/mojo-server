@@ -33,7 +33,9 @@ export default class BaseService<T> {
   }
 
   async getById<I>(id: string, options?: QueryOptions): Promise<I> {
-    const resource = (await this.model.findOne({ _id: mongoose.Types.ObjectId(id) }, {}, options)) as I;
+    const resource = (await this.model
+      .findOne({ _id: mongoose.Types.ObjectId(id) }, {}, options)
+      .populate('groups')) as I;
     return resource;
   }
 

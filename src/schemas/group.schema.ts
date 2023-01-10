@@ -91,7 +91,7 @@ export const payment = object({
 export const wallet = object({
   body: object({
     group: string({
-      required_error: 'group is required',
+      required_error: 'group id is required',
     }),
   }),
 });
@@ -105,3 +105,4 @@ export type groupAddUserInput = TypeOf<typeof groupAddUser>;
 
 export type createBookInput = TypeOf<typeof createGroupSchema>;
 export type paymentInput = TypeOf<typeof payment>;
+export type walletInput = TypeOf<typeof wallet>;

@@ -14,5 +14,6 @@
   },
   "[dockerfile]": {
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
-  }
+  },
+  "vscode.tsc.compiler.alertOnError": "never"
 }

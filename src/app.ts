@@ -10,7 +10,7 @@ dotenv.config();
 
 import connect from '@utils/connect';
 import log from '@utils/logger/index';
-import { SERVER_PORT, SERVER_HOST } from './config';
+import { SERVER_PORT } from './config';
 import appMiddleWares from './config/middlewares';
 import { routesV1 } from './routes';
 
@@ -18,7 +18,6 @@ const app = express();
 app.use(appMiddleWares);
 
 const port = SERVER_PORT;
-const host = SERVER_HOST;
 // eslint-disable-next-line no-console
 console.log({ port, host: os.hostname() });
 app.get('/', (req, res) => {
@@ -32,8 +31,8 @@ app.use(express.json());
 //   res.status(404).send("route not found");
 // });
 
-app.listen(port, host, async () => {
-  log.info(`Server listening at http://${host}:${port}`);
+app.listen(port, async () => {
+  log.info(`Server listening on ${port}`);
   await connect();
 
   app.use('/api/v1', routesV1);

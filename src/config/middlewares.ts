@@ -10,7 +10,7 @@ const app = express();
 app.use(
   cors({
     origin: [
-      `http://${host}:${port}`,
+      `https://mojo-server-production.up.railway.app:${port}`,
       `http://${host}:8080`,
       `http://localhost:8081`,
       `http://localhost:3000`,

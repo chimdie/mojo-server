@@ -3,6 +3,7 @@
 /* eslint-disable import/first */
 import 'reflect-metadata';
 import express from 'express';
+import os from 'os';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -19,7 +20,7 @@ app.use(appMiddleWares);
 const port = SERVER_PORT;
 const host = SERVER_HOST;
 // eslint-disable-next-line no-console
-console.log({ host, port });
+console.log({ port, host: os.hostname() });
 app.get('/', (req, res) => {
   res.send('Welcome!');
 });

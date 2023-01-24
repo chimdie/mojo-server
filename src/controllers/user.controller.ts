@@ -11,6 +11,7 @@ import UserService from '../services/user.service';
 import BaseController from './base.controller';
 
 const Flutterwave = require('flutterwave-node-v3');
+// const paystack = require('paystack-node');
 
 @autoInjectable()
 export default class UserController extends BaseController {

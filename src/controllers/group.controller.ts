@@ -1,12 +1,11 @@
 import { NextFunction, Request, Response } from 'express';
 import { autoInjectable } from 'tsyringe';
 import { groupStatus } from '@interfaces/contstants';
-import { GroupDocument, UserDocumentI } from '@interfaces/document.interface';
+import { GroupDocument, UserDocumentI, WalletDocumentI } from '@interfaces/document.interface';
 import { GetGroupInput, groupAddUserInput, MemberInput, paymentInput } from '@schemas/index';
 import UserService from '@services/user.service';
 import WalletService from '@services/wallet.service';
 import { FLW_PUBLIC_KEY, FLW_SECRET_KEY } from 'src/config';
-import { WalletDocumentI } from '../../dist/interfaces/document.interface';
 import GroupService from '../services/group.service';
 import BaseController from './base.controller';
 

@@ -6,6 +6,7 @@ export interface UserDocumentI extends mongoose.Document {
   fullName: string;
   bvn: string;
   phoneNumber: string;
+  customerCode: string;
   password: string;
   createdAt: Date;
   updatedAt: Date;

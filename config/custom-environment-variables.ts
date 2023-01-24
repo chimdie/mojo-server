@@ -13,4 +13,9 @@ export default {
     publicKey: 'FLW_PUBLIC_KEY',
     secretKey: 'FLW_SECRET_KEY',
   },
+  server: {
+    dbUri: 'DB_URI',
+    port: 'PORT',
+    host: 'HOST',
+  },
 };

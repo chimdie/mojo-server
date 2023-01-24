@@ -18,7 +18,8 @@ app.use(appMiddleWares);
 
 const port = SERVER_PORT;
 const host = SERVER_HOST;
-
+// eslint-disable-next-line no-console
+console.log({ host, port });
 app.get('/', (req, res) => {
   res.send('Welcome!');
 });

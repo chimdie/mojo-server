@@ -1,4 +1,4 @@
-const PayStack = require('paystack-node');
+import PayStack from 'paystack-node';
 
 const APIKEY = process.env.PATSTACK_SECRET_KEY;
 const environment = process.env.NODE_ENV;

@@ -37,13 +37,19 @@ export default class UserController extends BaseController {
     const fullName = `${user.lastName} ${user.firstName}`;
     const { password } = req.body;
     const hashedPassword = await hash(password);
+
     try {
+      const userExists = await this.service.get(user);
+
+      if (userExists) {
+        return res.status(400).json({ error: true, message: 'Email or phone number already exists' });
+      }
+
       const newUser = await this.service.post({
         ...user,
         fullName,
         password: hashedPassword,
       });
-
       return res.status(201).json(newUser);
     } catch (err) {
       return res.status(400).json({ message: 'Unable to create account : ', err });
